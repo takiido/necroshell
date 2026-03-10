@@ -1,4 +1,5 @@
 mod clock;
+mod backlight;
 
 use gtk4::prelude::*;
 use gtk4::{Application, ApplicationWindow};
@@ -37,5 +38,8 @@ fn add_widgets(window: &ApplicationWindow) {
     let clock = clock::create_widget();
     clock.set_parent(&wrapper);
 
+    let backlight = backlight::create_widget();
+    backlight.set_parent(&wrapper);
+    
     window.set_child(Some(&wrapper));
 }
