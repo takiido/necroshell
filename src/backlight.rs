@@ -36,12 +36,6 @@ static MAX_BRIGHTNESS : OnceLock<u32> = OnceLock::new();
 pub fn create_widget() -> Result<GtkBox, BacklightError> {
     let brightness = get_brightness()?;
     let container = GtkBox::new(Orientation::Horizontal, 0);
-    let label = Label::new(Some(
-        &format!(
-            "{}%", brightness
-        )
-    ));
-    label.set_parent(&container);
     let slider = Scale::with_range(
         Orientation::Horizontal,
         0.0,
@@ -55,6 +49,12 @@ pub fn create_widget() -> Result<GtkBox, BacklightError> {
     });
     slider.set_value(brightness as f64);
     slider.set_parent(&container);
+    let label = Label::new(Some(
+        &format!(
+            "{}%", brightness
+        )
+    ));
+    label.set_parent(&container);
 
     watch_brightness(label)?;
 
